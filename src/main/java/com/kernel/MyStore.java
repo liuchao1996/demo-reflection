@@ -41,7 +41,7 @@ public class MyStore {
 
             if (mapping != null) {
 
-                HashMap<String, Method> methodHashMap = new HashMap<>();
+                HashMap<String, Method> methodHashMap = new HashMap<>(type.getMethods().length);
 
                 for (Method m : type.getMethods()) {
 
@@ -61,28 +61,28 @@ public class MyStore {
     /**
      * 创建一个 执行方法类对象 放进map中
      *
-     * @param apiMapping
+     * @param classMapping
      * @param beanName
      * @param methodMap
      */
-    private void addApiItem(MyMapping apiMapping, String beanName, HashMap<String, Method> methodMap) {
+    private void addApiItem(MyMapping classMapping, String beanName, HashMap<String, Method> methodMap) {
         MyRunnable apiRun = new MyRunnable();
-        apiRun.apiName = apiMapping.value();
+       // apiRun.apiName = calssMapping.value();
         apiRun.targetMethodMap = methodMap;
         apiRun.targetName = beanName;
-        apiRun.myMapping = apiMapping;
+        apiRun.myMapping = classMapping;
         apiRun.target = applicationContext.getBean(beanName);
-        apiMap.put(apiMapping.value(), apiRun);
+        apiMap.put(classMapping.value(), apiRun);
     }
 
     /**
      * 获取执行对象
      *
-     * @param apiName
+     * @param classMapping
      * @return
      */
-    public MyRunnable findApiRunnable(String apiName) {
-        return apiMap.get(apiName);
+    public MyRunnable findApiRunnable(String classMapping) {
+        return apiMap.get(classMapping);
     }
 
 }
