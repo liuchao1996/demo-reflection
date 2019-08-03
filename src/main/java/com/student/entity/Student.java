@@ -22,4 +22,7 @@ public class Student {
         this.born = born;
         this.score = score;
     }
+
+    public Student() {
+    }
 }
